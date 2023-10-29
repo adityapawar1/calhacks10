@@ -33,13 +33,20 @@ export const detectIngredients = action({
           },
           features: [
             {
-              maxResults: 50,
+              maxResults: 200,
+              model: "builtin/weekly",
               type: "LABEL_DETECTION",
             },
           ],
+          imageContext: {
+            productSearchParams: {
+              productCategories: ["homegoods-v2"],
+            },
+          },
         },
       ],
     };
+
     const response = await fetch(apiUrl, {
       method: "post",
       body: JSON.stringify(payload),
