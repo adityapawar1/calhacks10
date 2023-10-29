@@ -77,13 +77,21 @@
 }
 
 .titleContainer {
-  border: 100px solid rgb(235, 151, 66);
+  border: 5px solid black;
 }
 
 .cardContainers {
-  display: grid;
+  display: grid; 
   grid-template-columns: 1fr 1fr 1fr;
+  cursor: pointer;
   /* grid-gap: 1rem; */
+  width: 100%; /* Initially, the card should be the width of the container */
+  height: auto; /* Auto height to fit content */
+  transition: width 0.3s; /* Add a smooth transition for the width change */
+}
+
+.cardContainer.expanded {
+  width: 100%; /* You can set the desired width for the expanded state */
 }
 
 .cardContainer {
@@ -98,7 +106,9 @@
   margin: 2rem;
   width: calc(33.33% - 2rem); /* Distribute equally with margin included */ /* Set a maximum width for the cards */
   max-width: 400px;
-  visibility: hidden;
+  /* visibility: hidden; */
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
 @media (max-width: 768px) {
