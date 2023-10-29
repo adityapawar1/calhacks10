@@ -1,64 +1,59 @@
-import { v } from "convex/values"
-import { query, mutation, action } from "./_generated/server"
-import { api } from "./_generated/api"
+"use node";
 
-// Write your Convex functions in any file inside this directory (`convex`).
-// See https://docs.convex.dev/functions for more.
+import { v } from "convex/values";
+import { action } from "./_generated/server";
+import { env } from "process";
 
-// You can read data from the database via a query function:
-export const listIdeas = query({
-  // Validators for arguments.
-  args: {},
+type LabelAnnotations = {
+  mid: string;
+  description: string;
+  score: number;
+  topicality: number;
+};
+type ApiResponse = {
+  responses: { labelAnnotations: LabelAnnotations[] }[];
+};
 
-  // Query function implementation.
-  handler: async (ctx, args) => {
-    // Read the database as many times as you need here.
-    // See https://docs.convex.dev/database/reading-data.
-    return await ctx.db.query("ideas").collect()
+const apiPath = "https://vision.googleapis.com/v1/images:annotate";
+const apiKey = "AIzaSyAmXEMhnur2Lf0QsVly2d-qWthlgjFn63c";
+const apiUrl = `${apiPath}?key=${apiKey}`;
+
+export const detectIngredients = action({
+  args: { image: v.string() },
+  handler: async (_, args) => {
+    // Performs label detection on the image file
+    const parsedImageString = args.image.split(",")[1].replaceAll("\n", "");
+    console.log(`api key ${apiKey}`);
+    console.log(parsedImageString);
+    const payload = {
+      requests: [
+        {
+          image: {
+            content: parsedImageString,
+          },
+          features: [
+            {
+              maxResults: 50,
+              type: "LABEL_DETECTION",
+            },
+          ],
+        },
+      ],
+    };
+    const response = await fetch(apiUrl, {
+      method: "post",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" },
+    });
+    console.log(JSON.stringify(payload));
+    console.log(JSON.stringify(response));
+    console.log(response);
+    const labels: ApiResponse = await response.json();
+    console.log(labels);
+    const ingredients = labels.responses[0].labelAnnotations.map(
+      (a) => a.description,
+    );
+
+    return ingredients;
   },
-})
-
-// You can write data to the database via a mutation function:
-export const saveIdea = mutation({
-  // Validators for arguments.
-  args: {
-    idea: v.string(),
-    random: v.boolean(),
-  },
-
-  // Mutation function implementation.
-  handler: async (ctx, args) => {
-    // Insert or modify documents in the database here.
-    // Mutations can also read from the database like queries.
-    // See https://docs.convex.dev/database/writing-data.
-
-    // Optionally, capture the ID of the newly created document
-    const id = await ctx.db.insert("ideas", args)
-
-    // Optionally, return a value from your mutation.
-    return id
-  },
-})
-
-// You can fetch data from and send data to third-party APIs via an action:
-export const fetchRandomIdea = action({
-  // Validators for arguments.
-  args: {},
-
-  // Action implementation.
-  handler: async (ctx) => {
-    // Use the browser-like `fetch` API to send HTTP requests.
-    // See https://docs.convex.dev/functions/actions#calling-third-party-apis-and-using-npm-packages.
-    const response = await fetch("https://appideagenerator.com/call.php")
-    const idea = await response.text()
-
-    // Write or query data by running Convex mutations/queries from within an action
-    await ctx.runMutation(api.myFunctions.saveIdea, {
-      idea: idea.trim(),
-      random: true,
-    })
-
-    // Optionally, return a value from your action
-    return idea
-  },
-})
+});
