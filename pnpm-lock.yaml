@@ -28,6 +28,7 @@ specifiers:
   react-day-picker: ^8.9.1
   react-dom: ^18.2.0
   react-hook-form: ^7.47.0
+  react-webcam: ^7.2.0
   tailwind-merge: ^1.14.0
   tailwindcss: ^3.3.3
   tailwindcss-animate: ^1.0.7
@@ -51,6 +52,7 @@ dependencies:
   react-day-picker: 8.9.1_kzhlcyde2l6xjiirkbg7jzhosa
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.47.0_react@18.2.0
+  react-webcam: 7.2.0_biqbaboplfbrettd7655fr4n2y
   tailwind-merge: 1.14.0
   tailwindcss-animate: 1.0.7_tailwindcss@3.3.5
   zod: 3.22.4
@@ -3376,6 +3378,16 @@ packages:
       invariant: 2.2.4
       react: 18.2.0
       tslib: 2.6.2
+    dev: false
+
+  /react-webcam/7.2.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-xkrzYPqa1ag2DP+2Q/kLKBmCIfEx49bVdgCCCcZf88oF+0NPEbkwYk3/s/C7Zy0mhM8k+hpdNkBLzxg8H0aWcg==}
+    peerDependencies:
+      react: '>=16.2.0'
+      react-dom: '>=16.2.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react/18.2.0:

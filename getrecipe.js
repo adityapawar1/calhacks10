@@ -1,6 +1,6 @@
 const LIST = ["apples", "flour", "picnic basket"];
 const ingredientlist = LIST.join(",");
-const apiKey = 'f63c13d7a7a846cfb2cd12a03d9c6bf3'; // Replace with your actual API key
+const apiKey = 'f63c13d7a7a846cfb2cd12a03d9c6bf3';
 
 async function getRecipeData() {
     const recipeDataResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredientlist}&number=3`);
@@ -32,7 +32,19 @@ async function getRecipeData() {
                 steps.push(step.step);
             }
         }
-
+        /*Creates dictionary in format
+        [
+            {
+                unused: {"Cinnamon": "1 tsp"},
+                used: {"Granny Smith Apple": "2"},
+                instructions: ["PreHeat Oven", "Eat"],
+                title: 'Apple Pie'
+            },
+            {
+                another recipe
+            }
+        ]
+        */
         const info = {
             unused: missingIngredients,
             used: usedIngredients,
@@ -41,8 +53,7 @@ async function getRecipeData() {
         };
         recipeInfo.push(info);
     }
-
-    console.log(recipeInfo);
+    return recipeInfo;
 }
 
-getRecipeData()
+getRecipeData().then(x => console.log(x));
