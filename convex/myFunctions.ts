@@ -15,7 +15,7 @@ type ApiResponse = {
 };
 
 const apiPath = "https://vision.googleapis.com/v1/images:annotate";
-const apiKey = "AIzaSyAmXEMhnur2Lf0QsVly2d-qWthlgjFn63c";
+const apiKey = "***";
 const apiUrl = `${apiPath}?key=${apiKey}`;
 
 export const detectIngredients = action({
