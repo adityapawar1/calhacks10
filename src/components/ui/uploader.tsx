@@ -25,13 +25,10 @@ export default function Uploader() {
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold mt-8 text-center">
-        Image Detector
-      </h1>
-
-      <h2 className="text-center">Upload image here:</h2>
-      <div>
-        <h1>Upload and Display Image using React Hook's</h1>
+      <div className="uploaderContainer">
+      <b><h1 className="text-center">Upload image here:</h1></b>
+        <br />
+        <br />
 
         {selectedImage && (
           <div>
@@ -45,6 +42,7 @@ export default function Uploader() {
           </div>
         )}
 
+        ###/* where to return */
         <button
           onClick={async () =>
             setResults(await detectIngredients({ image: imageString }))
@@ -61,7 +59,13 @@ export default function Uploader() {
             toBase64(event.target.files[0]);
           }}
         />
-        <h5> Results: {`${results}`} </h5>
+        {/* <h5> Results: {`${results}`} </h5> */}
+        <br />
+        <br />
+        <br />
+        <br />
+      <b><h2 className="text-center">Or take a photo:</h2></b>
+
       </div>
     </>
   );

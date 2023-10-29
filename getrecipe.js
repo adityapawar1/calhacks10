@@ -56,3 +56,5 @@ async function getRecipeData() {
 }
 
 getRecipeData().then(x => console.log(x));
+
+export default getRecipeData
