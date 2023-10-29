@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+* {
+  
+}
 @layer base {
   :root {
     --convex-yellow: #f3b01c;
@@ -66,45 +70,75 @@
       font-size: 30px;
     }
   }
+}
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --background: 240 10% 3.9%;
-      --foreground: 0 0% 98%;
+* {
+  background-color: transparent;
+}
 
-      --card: 240 10% 3.9%;
-      --card-foreground: 0 0% 98%;
+.titleContainer {
+  border: 100px solid rgb(235, 151, 66);
+}
 
-      --popover: 240 10% 3.9%;
-      --popover-foreground: 0 0% 98%;
+.cardContainers {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-gap: 1rem; */
+}
 
-      --primary: 0 0% 98%;
-      --primary-foreground: 240 5.9% 10%;
+.cardContainer {
+  background: rgb(101, 201, 237);
+  text-align: center;
+  padding: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1.2rem;
+  margin: 2rem;
+  width: calc(33.33% - 2rem); /* Distribute equally with margin included */ /* Set a maximum width for the cards */
+  max-width: 400px;
+  visibility: hidden;
+}
 
-      --secondary: 240 3.7% 15.9%;
-      --secondary-foreground: 0 0% 98%;
-
-      --muted: 240 3.7% 15.9%;
-      --muted-foreground: 240 5% 64.9%;
-
-      --accent: 240 3.7% 15.9%;
-      --accent-foreground: 0 0% 98%;
-
-      --destructive: 0 62.8% 30.6%;
-      --destructive-foreground: 0 0% 98%;
-
-      --border: 240 3.7% 15.9%;
-      --input: 240 3.7% 15.9%;
-      --ring: 240 4.9% 83.9%;
-    }
+@media (max-width: 768px) {
+  .cardContainers {
+    grid-template-columns: 1fr 1fr; /* 2 columns on smaller screens */
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+@media (max-width: 480px) {
+  .cardContainers {
+    grid-template-columns: 1fr; /* 1 column on even smaller screens */
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+}
+
+.cardContainer:hover {
+  scale: 1.05;
+}
+
+.typeDesign {
+  color: black;
+}
+
+.titleDesign {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+  font-size: 75px;
+  font-weight: bolder;
+  border-bottom: 5px solid black;
+}
+
+.dragNdrop {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 200px;
+  width: 300px; */
+  border: 1px dotted;
+}
+
+.dragNdrop {
+  height: 500px;
 }
