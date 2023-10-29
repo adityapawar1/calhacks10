@@ -1,4 +1,4 @@
-const apiKey = "f63c13d7a7a846cfb2cd12a03d9c6bf3";
+const apiKey = "e1c35f8ec1884309832e273bc5c00a21";
 
 export async function getRecipeData(LIST: string[]) {
   const ingredientlist = LIST.join(",");
