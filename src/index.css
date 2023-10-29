@@ -84,7 +84,7 @@
   display: grid; 
   grid-template-columns: 1fr 1fr 1fr;
   cursor: pointer;
-  /* grid-gap: 1rem; */
+  grid-gap: 1rem;
   width: 100%; /* Initially, the card should be the width of the container */
   height: auto; /* Auto height to fit content */
   transition: width 0.3s; /* Add a smooth transition for the width change */
@@ -140,15 +140,45 @@
   border-bottom: 5px solid black;
 }
 
-.dragNdrop {
+
+.inputDisplay {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 100px 450px;
+}
+
+.webcamContainer {
+  grid-row: 3;
+  grid-column: 2;
+}
+
+.uploaderContainer {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.btn-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* height: 200px;
-  width: 300px; */
-  border: 1px dotted;
+  padding: 20px;
 }
 
-.dragNdrop {
-  height: 500px;
+.webcamButton {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #4caf50;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-right: 75px;
+}
+
+.webcamButton:hover {
+  background-color: #45a049;
 }

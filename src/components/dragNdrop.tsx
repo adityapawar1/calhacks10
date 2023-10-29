@@ -41,7 +41,7 @@ export function FileDrop() {
   };
  
   return (
-    <div
+    <div className='
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
