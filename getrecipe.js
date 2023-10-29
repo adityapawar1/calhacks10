@@ -6,7 +6,6 @@ async function getRecipeData() {
     const recipeDataResponse = await fetch(`https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredientlist}&number=3`);
     const recipeData = await recipeDataResponse.json();
     const recipeInfo = [];
-
     for (const recipe of recipeData) {
         const missingIngredients = {};
         const usedIngredients = {};
