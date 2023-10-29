@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { useAction, useMutation, useQuery } from "convex/react"
 import { api } from "../convex/_generated/api"
 import { useState } from "react"
@@ -62,8 +63,14 @@ function App() {
         
       </main>
 
+=======
+function App() {
+  return (
+    <>
+      <main className="container max-w-2xl flex flex-col gap-8"></main>
+>>>>>>> 1d4cbe80f8e01ebb8ef3f5b694b164f33a137878
     </>
-  )
+  );
 }
 
-export default App
+export default App;
