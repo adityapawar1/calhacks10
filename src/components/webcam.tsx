@@ -12,14 +12,16 @@ const CustomWebcam = () => {
   }, [webcamRef]);
 
   return (
-    <div className="webcamContainer">
+    <div className="webcam webcamContainer">
       {imgSrc ? (
         <img src={imgSrc} alt="webcam" />
       ) : (
-        <Webcam height={600} width={600} ref={webcamRef} mirrored/>
+        <Webcam height={600} width={600} ref={webcamRef} mirrored />
       )}
       <div className="btn-container">
-        <button className="webcamButton" onClick={capture}><b>SNAP</b></button>
+        <button className="webcamButton" onClick={capture}>
+          <b>SNAP</b>
+        </button>
       </div>
     </div>
   );

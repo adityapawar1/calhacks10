@@ -1,36 +1,39 @@
-import { FileDrop } from "./components/dragNdrop.tsx";
+import { useEffect, useState } from "react";
+// import { FileDrop } from "./components/dragNdrop.tsx";
 import Uploader from "./components/ui/uploader.tsx";
 import Webcam from "./components/webcam.tsx";
-import GetRecipeData from "./getrecipe.js"
+import { getRecipeData } from "./getrecipe.ts";
+import Card from "./components/card.tsx";
+
 export default function App() {
-  
-  const cards = document.querySelectorAll(".typeDesign");
+  const [ingredients, setIngredients] = useState([]);
+  const [cards, setCards] = useState([<div />]);
 
-  for (let i = 0; i < cards.length && i < example.length; i++) {
-    const card = cards[i];
-    card.textContent = example[i]["title"].toUpperCase();
-  }
+  useEffect(() => {
+    const makeCards = async () => {
+      const recipes = await getRecipeData(ingredients);
 
-  for (let i = 0; i < cards.length && i < example.length; i++) {    
-    const card = cards[i];
-
-    card.textContent = example[i]["unused"];
-    for (let s=0; s<cards.length && s < example[i]["unused"].length; s++){
-      blobby.textContent = f`all keys in s : all connected keys`
-
-    }
-  }
-
-
-
-  const cardContainers = document.querySelectorAll(".cardContainer");
-
-  cardContainers.forEach((cardContainer) => {
-    cardContainer.addEventListener("click", () => {
-      const cardContainer = document.querySelector(".cardContainer");
-      cardContainer.classList.toggle("expanded");
-    });
-  });
+      setCards(
+        recipes.map((data: any, i: number) => {
+          return (
+            <Card
+              key={i}
+              used={Object.keys(data.used).map(
+                (key: string) => `${key} (${data.used[key]})`,
+              )}
+              unused={Object.keys(data.unused).map(
+                (key: string) => `${key} (${data.unused[key]})`,
+              )}
+              steps={data.instructions}
+              title={data.title}
+              text={JSON.stringify(data)}
+            />
+          );
+        }),
+      );
+    };
+    makeCards();
+  }, [ingredients]);
 
   return (
     <>
@@ -43,20 +46,10 @@ export default function App() {
         <h2 className="titleDesign">What's in your refrigerator?</h2>
         {/* <FileDrop className="dragNdrop"></FileDrop> */}
         <div className="inputDisplay">
-          <Uploader className="dragNdrop"></Uploader>
-          <Webcam className='webcam'></Webcam>
+          <Uploader setIngredients={setIngredients}></Uploader>
+          {/* <Webcam /> */}
         </div>
-        <div className="cardContainers">
-          <div className="cardContainer p-5 transition-all">
-            <p className="typeDesign"></p>
-          </div>
-          <div className="cardContainer p-5 transition-all">
-            <p className="typeDesign"></p>
-          </div>
-          <div className="cardContainer p-5 transition-all">
-            <p className="typeDesign"></p>
-          </div>
-        </div>
+        <div>{ingredients.length != 0 && cards}</div>
       </main>
     </>
   );

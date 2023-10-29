@@ -2,9 +2,8 @@ import { useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useState } from "react";
 
-export default function Uploader() {
+export default function Uploader({ setIngredients }: { setIngredients: any }) {
   const detectIngredients = useAction(api.myFunctions.detectIngredients);
-  const [results, setResults] = useState([]);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [imageString, setImageString] = useState("");
 
@@ -24,12 +23,13 @@ export default function Uploader() {
   };
 
   return (
-    <>
+    <div className="dragNdrop">
       <div className="uploaderContainer">
-      <b><h1 className="text-center">Upload image here:</h1></b>
+        <b>
+          <h1 className="text-center">Upload image here:</h1>
+        </b>
         <br />
         <br />
-
         {selectedImage && (
           <div>
             <img
@@ -41,16 +41,13 @@ export default function Uploader() {
             <button onClick={() => setSelectedImage(null)}>Remove</button>
           </div>
         )}
-
-        ###/* where to return */
         <button
           onClick={async () =>
-            setResults(await detectIngredients({ image: imageString }))
+            setIngredients(await detectIngredients({ image: imageString }))
           }
         >
           Run the detector
         </button>
-
         <input
           type="file"
           name="myImage"
@@ -64,9 +61,10 @@ export default function Uploader() {
         <br />
         <br />
         <br />
-      <b><h2 className="text-center">Or take a photo:</h2></b>
-
+        <b>
+          <h2 className="text-center">Or take a photo:</h2>
+        </b>
       </div>
-    </>
+    </div>
   );
 }
