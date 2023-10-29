@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 
+
 * {
   
 }
@@ -181,4 +182,12 @@
 
 .webcamButton:hover {
   background-color: #45a049;
+}
+
+.titleContainer {
+  background-image: url(./assets/download.jpeg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+  color: #FFFFFF;
 }

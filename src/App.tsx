@@ -2,7 +2,6 @@ import { FileDrop } from "./components/dragNdrop.tsx";
 import Uploader from "./components/ui/uploader.tsx";
 import Webcam from "./components/webcam.tsx";
 import GetRecipeData from "./getrecipe.js"
-
 export default function App() {
   
   const cards = document.querySelectorAll(".typeDesign");
